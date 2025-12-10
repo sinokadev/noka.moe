@@ -1,0 +1,8 @@
+{
+    "nokatest": {
+        "path": "test.txt"
+    },
+    "noka": {
+        "path": "test.redi"
+    }
+}

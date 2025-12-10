@@ -1,0 +1,63 @@
+RPF 파일 형식 사양 v1
+
+=== 기본 구조 ===
+
+$RPF:URL:1
+예약어 인자 (옵션)
+예약어 인자 (옵션)
+
+- 첫 줄: $RPF:[타입]:[버전]
+- 띄어쓰기와 줄바꿈은 동일한 구분자로 취급
+- 모든 명령어는 () 로 종료 (옵션이 없어도 필수)
+- 옵션은 무조건 마지막에 위치
+
+
+=== 옵션 형식 ===
+
+1. 명시적 (키:값) - 순서 무관
+   예약어 인자 (key:value key2:value2)
+
+2. 순서 기반 (값만) - 예약어마다 정해진 순서
+   예약어 인자 (value1 value2)
+
+3. 혼합 가능
+   예약어 인자 (value1 key2:value2)
+
+
+=== go 예약어 ===
+
+go [도메인/URL] (프로토콜 포트)
+
+- 터미널 명령어: 실행 시 리디렉트하고 종료
+- go 이후의 모든 명령어는 실행되지 않음
+- 순서 기반 옵션: 1번째=프로토콜, 2번째=포트
+- 포트 생략 시 자동으로 auto
+
+=== go 사용 예시 ===
+
+기본 사용:
+go sinoka.dev ()
+
+프로토콜 지정:
+go sinoka.dev (https)
+
+프로토콜 + 포트 (순서 기반):
+go sinoka.dev (https 80)
+
+명시적 지정:
+go sinoka.dev (https port:auto)
+go sinoka.dev (protocol:https port:80)
+
+모두 한 줄로도 가능:
+$RPF:URL:1 go sinoka.dev (https port:80)
+
+
+=== 실행 흐름 예시 ===
+
+$RPF:URL:1
+delay 3 ()
+title 이동중 ()
+go sinoka.dev (https)
+ignored ()
+
+→ delay 실행 → title 실행 → go 실행 후 종료
