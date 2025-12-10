@@ -2,7 +2,12 @@ from flask import Flask, render_template, send_file, redirect
 import json
 app = Flask(__name__)
 
-BASE_PATH = "/home/sinokadev/noka.moe/files/"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+BASE_PATH = os.getenv("PATH")
 
 def redi_parse(text: str):
     split_text = text.split()
