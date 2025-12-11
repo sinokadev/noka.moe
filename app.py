@@ -12,9 +12,9 @@ DATA_PATH = os.getenv("DATA_PATH")
 
 def redi_parse(text: str):
     split_text = text.split()
-    if split_text[0] == "$redi":
+    if len(split_text) >= 2 and split_text[0] == "$redi":
         return split_text[1]
-    else: return None
+    return None
 
 def is_it_true(value):
     return value.lower() == 'true'
