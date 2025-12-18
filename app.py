@@ -41,11 +41,12 @@ def root(just_url=None):
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             parse_result = redi_parse(file.read())
-    except UnicodeDecodeError: pass
+    except UnicodeDecodeError:
+        parse_result = None  # 스킵만 하고 계속 진행
 
     if parse_result:
         return safe_redirect(parse_result)
-
+    
     is_download = request.args.get('download', default="true", type=str)
 
     return send_file(file_path, as_attachment=is_it_true(is_download)) # send file
