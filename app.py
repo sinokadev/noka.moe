@@ -38,11 +38,15 @@ def root(just_url=None):
 
     file_path = f"{BASE_PATH}{data[just_url]['path']}"
     
-    with open(file_path, "r") as file: # read file
-        parse_result = redi_parse(file.read())
-        if parse_result:
-            return safe_redirect(parse_result) # redirect
-        
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            parse_result = redi_parse(file.read())
+    except UnicodeDecodeError:
+        return None  # 바이너리 파일 → 스킵
+
+    if parse_result:
+        return safe_redirect(parse_result)
+
     is_download = request.args.get('download', default="true", type=str)
 
     return send_file(file_path, as_attachment=is_it_true(is_download)) # send file
