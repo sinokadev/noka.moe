@@ -41,8 +41,7 @@ def root(just_url=None):
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             parse_result = redi_parse(file.read())
-    except UnicodeDecodeError:
-        return None  # 바이너리 파일 → 스킵
+    except UnicodeDecodeError: pass
 
     if parse_result:
         return safe_redirect(parse_result)
