@@ -1,5 +1,8 @@
 {
     "noka": {
         "path": "redi"
+    },
+    "justurl": {
+        "redirect": "sinoka.dev"
     }
 }
