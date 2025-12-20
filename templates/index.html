@@ -13,7 +13,7 @@
     <ul>
         {% for key, value in data.items() %}
             <li>
-                <a href="/{{ key }}"><strong>{{ key }}</strong></a><br>
+                <a href="/{{ key }}?download=false"><strong>{{ key }}</strong></a><br>
                 {% if "redirect" in value %}
                     Redirect to {{ value.redirect }}
                 {% else %}
