@@ -24,6 +24,7 @@ Dockerfile 실행 ㄱㄱ.
 
 ## update
 레포 pull하면 업뎃됩니다.
+도커 재시작도 하세요.
 
 ## use
 example.com/url?download=false  

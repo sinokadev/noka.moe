@@ -23,7 +23,8 @@ build and run the Dockerfile.
 ```
 
 ## update
-pull the repo.
+pull the repo.  
+restart docker.
 
 ## use
 example.com/url?download=false  
