@@ -48,7 +48,7 @@ def root(just_url=None):
     cache_data()
 
     if not just_url:
-        return render_template("index.html") # defalt
+        return render_template("main.html") # defalt
 
     if just_url not in data:
         return render_template("file_not_found.html"), 404 # not found
@@ -61,3 +61,8 @@ def root(just_url=None):
     is_download = request.args.get('download', default="true", type=str)
 
     return send_file(file_path, as_attachment=is_it_true(is_download)) # send file
+
+@app.route("/index")
+def index():
+    cache_data()
+    return render_template("index.html", data=data)
