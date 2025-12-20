@@ -10,11 +10,15 @@ load_dotenv()
 BASE_PATH = os.getenv("BASE_PATH")
 DATA_PATH = os.getenv("DATA_PATH")
 
-def redi_parse(text: str):
-    split_text = text.split()
-    if len(split_text) >= 2 and split_text[0] == "$redi":
-        return split_text[1]
-    return None
+
+data = {
+
+}
+with open(DATA_PATH, "r") as file: # read data
+    data = json.loads(file.read())
+
+latest_mtime = os.path.getmtime(DATA_PATH)
+
 
 def is_it_true(value):
     return value.lower() == 'true'
@@ -24,12 +28,25 @@ def safe_redirect(url):
         url = 'https://' + url
     return redirect(url)
 
+def cache_data():
+    global latest_mtime, data
+
+    try:
+        mtime = os.path.getmtime(DATA_PATH)
+    except FileNotFoundError:
+        return
+
+    if latest_mtime != mtime:
+        with open(DATA_PATH, "r", encoding="utf-8") as file:
+            data = json.load(file)
+        latest_mtime = mtime
+
+
 @app.route("/<just_url>")
 @app.route("/")
 def root(just_url=None):
-    with open(DATA_PATH, "r") as file: # read data
-        data = json.loads(file.read())
-    
+    cache_data()
+
     if not just_url:
         return render_template("index.html") # defalt
 
@@ -37,16 +54,10 @@ def root(just_url=None):
         return render_template("file_not_found.html"), 404 # not found
 
     file_path = f"{BASE_PATH}{data[just_url]['path']}"
-    
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            parse_result = redi_parse(file.read())
-    except UnicodeDecodeError:
-        parse_result = None  # 스킵만 하고 계속 진행
 
-    if parse_result:
-        return safe_redirect(parse_result)
-    
+    if "redirect" in data[just_url]:
+        return safe_redirect(data[just_url]["redirect"])
+
     is_download = request.args.get('download', default="true", type=str)
 
     return send_file(file_path, as_attachment=is_it_true(is_download)) # send file
