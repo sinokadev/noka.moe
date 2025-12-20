@@ -4,7 +4,7 @@ just url implementation
 # how to install???
 clone the repo.  
 rename data.example.json to data.json  
-create a file direcoty.  
+create a files direcoty.  
 add file to the files directory.  
 edit data.json
 build and run the Dockerfile.
