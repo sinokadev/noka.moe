@@ -10,7 +10,7 @@
     <ul>
         {% for key, value in data.items() %}
             <li>
-                <strong>{{ key }}</strong> →
+                <strong>{{ key }}</strong><br>
                 {% if "redirect" in value %}
                     Redirect to {{ value.redirect }}
                 {% else %}
