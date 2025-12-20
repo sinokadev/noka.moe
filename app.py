@@ -53,10 +53,10 @@ def root(just_url=None):
     if just_url not in data:
         return render_template("file_not_found.html"), 404 # not found
 
-    file_path = f"{BASE_PATH}{data[just_url]['path']}"
-
     if "redirect" in data[just_url]:
         return safe_redirect(data[just_url]["redirect"])
+
+    file_path = f"{BASE_PATH}{data[just_url]['path']}"
 
     is_download = request.args.get('download', default="true", type=str)
 
