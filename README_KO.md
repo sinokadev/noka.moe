@@ -91,6 +91,7 @@ https://example.com/url?download=false
 https://example.com/url?download=true
 
  - 리디렉션 라우트: `download` 파라미터는 적용되지 않습니다.
+ - 모든 리디렉션과 파일 목록: https://example.com/index (따라서 index라는 라우팅 이름을 작동하지 않습니다.)
 
 # 라이선스
 소스코드는 LICENSE 파일에 따라 제공됩니다.
