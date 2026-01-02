@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+
+  {% if embed.title %}
+  <meta property="og:title" content="{{ embed.title }}">
+  {% endif %}
+
+  {% if embed.description %}
+  <meta property="og:description" content="{{ embed.description }}">
+  {% endif %}
+
+  {% if embed.image %}
+  <meta property="og:image" content="{{ embed.image }}">
+  {% endif %}
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.url }}">
+
+  <script>
+    window.location.replace("{{ url }}");
+  </script>
+</head>
+<body>
+  Redirect to <a href="{{ url }}">{{ url }}</a>
+</body>
+</html>

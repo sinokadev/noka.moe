@@ -23,10 +23,14 @@ latest_mtime = os.path.getmtime(DATA_PATH)
 def is_it_true(value):
     return value.lower() == 'true'
 
-def safe_redirect(url):
+def custom_redirect(url, embed=None):
     if not url.startswith(('http://', 'https://')):
         url = 'https://' + url
-    return redirect(url)
+    if not embed:
+        return redirect(url, code=302)
+    else:
+        return render_template("embeded.html", url=url, embed=embed)
+
 
 def cache_data():
     global latest_mtime, data
@@ -54,7 +58,10 @@ def root(just_url=None):
         return render_template("file_not_found.html"), 404 # not found
 
     if "redirect" in data[just_url]:
-        return safe_redirect(data[just_url]["redirect"])
+        if data[just_url]["embed"]:
+            return custom_redirect(data[just_url]["redirect"], data[just_url]["embed"]) # embeded
+        # no embed option
+        return custom_redirect(data[just_url]["redirect"]) # just redirect
 
     file_path = f"{BASE_PATH}{data[just_url]['path']}"
 
