@@ -24,12 +24,14 @@ def is_it_true(value):
     return value.lower() == 'true'
 
 def custom_redirect(url, embed=None):
-    if not url.startswith(('http://', 'https://')):
-        url = 'https://' + url
-    if not embed:
+    if not url.startswith(("http://", "https://")):
+        url = "https://" + url
+
+    if embed is None:
         return redirect(url, code=302)
-    else:
-        return render_template("embeded.html", url=url, embed=embed)
+
+    return render_template("embeded.html", target_url=url, embed=embed), 200
+
 
 
 def cache_data():
