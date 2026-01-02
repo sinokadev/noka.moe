@@ -41,7 +41,7 @@ files/
 6. 빌드하고, 실행하세요.
 ```
 docker build -t justurl .
-docker run -p 8080:8080 justurl
+docker run -p 80:8000 justurl
 ```
 
 

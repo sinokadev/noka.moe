@@ -30,7 +30,7 @@ def custom_redirect(url, embed=None):
     if embed is None:
         return redirect(url, code=302)
 
-    return render_template("embeded.html", target_url=url, embed=embed), 200
+    return render_template("embeded.html", url=url, embed=embed), 200
 
 
 

@@ -1,8 +1,15 @@
 {
-    "noka": {
-        "path": "redi"
-    },
-    "justurl": {
-        "redirect": "sinoka.dev"
+  "justurl": {
+    "redirect": "example.net",
+
+    "embed": {
+      "title": "Example Website",
+      "description": "You will be redirected to example.net",
+      "image": "https://example.com/static/example.png"
     }
+  },
+
+  "justfile": {
+    "path": "test.html"
+  }
 }

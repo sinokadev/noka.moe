@@ -43,7 +43,7 @@ files/
 6. Build and run the Docker container:
 ```
 docker build -t justurl .
-docker run -p 8080:8080 justurl
+docker run -p 80:8000 justurl
 ```
 
 
